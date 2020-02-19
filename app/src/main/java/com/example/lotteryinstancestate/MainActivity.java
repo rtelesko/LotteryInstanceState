@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btGenerateNumbers;
 
     // EuroMillions numbers
-    private int numbers[] = new int[LOTTO_NUMBERS];
+    private int[] numbers = new int[LOTTO_NUMBERS];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +63,14 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("number5", numbers[4]);
     }
 
+
+    // For using onCreate or onRestoreInstanceState for restoring see https://stackoverflow.com/questions/36408776/using-oncreate-vs-onrestoreinstancestate
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         Toast.makeText(getApplicationContext(), "onRestoreInstanceState", Toast.LENGTH_SHORT).show();
-
+        counter = savedInstanceState.getInt("counter");
+        tvCounter.setText("Counter: " + counter);
         numbers[0] = savedInstanceState.getInt("number1");
         numbers[1] = savedInstanceState.getInt("number2");
         numbers[2] = savedInstanceState.getInt("number3");
@@ -77,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
             tvResult.append(numbers[i] + " ");
         }
 
-        counter = savedInstanceState.getInt("counter");
-        tvCounter.setText("Counter: " + counter);
+
     }
 
 }
